@@ -51,6 +51,8 @@ function App() {
       <button onClick={createMerchant}>Add merchant</button>
       <br />
       <button onClick={deleteMerchant}>Delete merchant</button>
+      <div>Hello Vatsal</div>
+      
     </div>
   );
 }
