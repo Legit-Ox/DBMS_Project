@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/customer/LandingPage";
 function App() {
   return (
-    <div className="bg-black">
+    <div className="">
       <Routes>
         <Route path="/merchant" element={<MerchantMock />} />
         <Route path="/landing" element={<LandingPage />} />
