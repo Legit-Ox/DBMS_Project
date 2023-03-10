@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
-import SearchBar from "./SearchBar";
+
 
 const Nav = () => {
   let [open, setOpen] = useState(false);
@@ -51,7 +50,7 @@ const Nav = () => {
           </a>
         </div>
 
-        <div className="relative mx-auto text-gray-600 lg:block hidden">
+        <div className="relative mx-auto text-gray-700 lg:block hidden">
           <input
             className="border-2 border-gray-300 bg-white h-10 pl-2 pr-8 rounded-lg text-sm focus:outline-none"
             type="search"
