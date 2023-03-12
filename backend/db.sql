@@ -94,3 +94,8 @@ CREATE TABLE users(
     user_createdAt date default current_date
 
 ),
+ALTER TABLE restaurants ADD COLUMN rest_owner_id INTEGER REFERENCES users(user_id);
+UPDATE restaurants SET rest_owner_id = 3 WHERE rest_id = 3;
+UPDATE restaurants SET rest_owner_id = 4 WHERE rest_id = 4;
+alter table users add isOwner boolean;
+update users set isOwner = true where user_id = 3;

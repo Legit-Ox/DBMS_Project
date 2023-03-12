@@ -65,7 +65,7 @@ exports.protected = async (req, res) => {
   try {
     //fetch current user data copilot
     const { rows } = await db.query(
-      "select user_email from users where user_id = $1",
+      "select user_email,isowner from users where user_id = $1",
       [req.user.user_id]
     );
     //return it also along with protected info
@@ -74,6 +74,7 @@ exports.protected = async (req, res) => {
       xyz: "nice",
 
       user: rows[0].user_email,
+      isowner: rows[0].isowner,
     });
   } catch (error) {
     console.log(error.message);

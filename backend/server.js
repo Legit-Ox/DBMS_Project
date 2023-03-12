@@ -15,26 +15,28 @@ app.use(cookieParser());
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(passport.initialize());
 const authRoutes = require("./routes/auth");
+const restaurantRoutes = require("./routes/restaurant");
 app.use("/api/v1", authRoutes);
+app.use("/api/v1", restaurantRoutes);
 
 //Get all restaurants
 
-// app.get("/api/v1/restaurants", async (req, res) => {
-//   try {
-//     const results = await db.query("SELECT * from restaurants");
-//     console.log("get all Restaurants");
-//     console.log(results);
-//     res.status(200).json({
-//       status: "success",
-//       results: results.rows.length,
-//       data: {
-//         restaurants: results.rows,
-//       },
-//     });
-//   } catch {
-//     console.log("error");
-//   }
-// });
+app.get("/api/v1/restaurants", async (req, res) => {
+  try {
+    const results = await db.query("SELECT * from restaurants");
+    console.log("get all Restaurants");
+    console.log(results);
+    res.status(200).json({
+      status: "success",
+      results: results.rows.length,
+      data: {
+        restaurants: results.rows,
+      },
+    });
+  } catch {
+    console.log("error");
+  }
+});
 // //Get a restaurant
 // app.get("/api/v1/restaurants/:id", async (req, res) => {
 //   console.log("get a Restaurant");
@@ -53,34 +55,6 @@ app.use("/api/v1", authRoutes);
 //   } catch (error) {
 //     console.log(error);
 //   }
-// });
-// //Create a restaurant
-// app.post("/api/v1/restaurants", async (req, res) => {
-//   console.log("create a Restaurant");
-//   try {
-//     //cmon copilot
-//     const results = await db.query(
-//       "INSERT INTO restaurants (rest_name,rest_veg,rest_location,rest_type,rest_rating,rest_image,rest_description) VALUES ($1, $2, $3, $4, $5, $6, $7) returning *",
-//       [
-//         req.body.rest_name,
-//         req.body.rest_veg,
-//         req.body.rest_location,
-//         req.body.rest_type,
-//         req.body.rest_rating,
-//         req.body.rest_image,
-//         req.body.rest_description,
-//       ]
-//     );
-//     console.log(results);
-//     res.status(201).json({
-//       status: "success",
-//       data: {
-//         restaurant: results.rows,
-//       },
-//     });
-//   } catch (error) {}
-
-//   console.log(req.body);
 // });
 // // Update Restaurants
 // app.put("/api/v1/restaurants/:id", async (req, res) => {

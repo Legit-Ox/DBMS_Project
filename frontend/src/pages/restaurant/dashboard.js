@@ -3,10 +3,12 @@ import { useDispatch } from "react-redux";
 import { fetchProtectedInfo, onLogout } from "../../api/auth";
 import Layout from "../../components/layout";
 import { unauthenticateUser } from "../../redux/slices/authSlice";
+import LandingPage from "../customer/LandingPage";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(null);
+  const [isOwner, setIsOwner] = useState(false);
   const [protectedData, setProtectedData] = useState(null);
 
   const logout = async () => {
@@ -25,6 +27,7 @@ const Dashboard = () => {
       const { data } = await fetchProtectedInfo();
 
       setProtectedData(data.user);
+      setIsOwner(data.isowner);
 
       setLoading(false);
     } catch (error) {
@@ -40,7 +43,7 @@ const Dashboard = () => {
     <Layout>
       <h1>Loading...</h1>
     </Layout>
-  ) : (
+  ) : isOwner ? (
     <div>
       <Layout>
         <h1>Dashboard</h1>
@@ -51,7 +54,8 @@ const Dashboard = () => {
         </button>
       </Layout>
     </div>
+  ) : (
+    <LandingPage />
   );
 };
-
 export default Dashboard;
