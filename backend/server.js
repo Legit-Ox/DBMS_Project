@@ -16,27 +16,13 @@ app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(passport.initialize());
 const authRoutes = require("./routes/auth");
 const restaurantRoutes = require("./routes/restaurant");
+const menuRoutes = require("./routes/menu");
+const orderRoutes = require("./routes/orders");
 app.use("/api/v1", authRoutes);
 app.use("/api/v1", restaurantRoutes);
+app.use("/api/v1", menuRoutes);
+app.use("/api/v1", orderRoutes);
 
-//Get all restaurants
-
-app.get("/api/v1/restaurants", async (req, res) => {
-  try {
-    const results = await db.query("SELECT * from restaurants");
-    console.log("get all Restaurants");
-    console.log(results);
-    res.status(200).json({
-      status: "success",
-      results: results.rows.length,
-      data: {
-        restaurants: results.rows,
-      },
-    });
-  } catch {
-    console.log("error");
-  }
-});
 // //Get a restaurant
 // app.get("/api/v1/restaurants/:id", async (req, res) => {
 //   console.log("get a Restaurant");

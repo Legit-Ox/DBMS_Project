@@ -17,13 +17,13 @@ exports.getUsers = async (req, res) => {
 };
 
 exports.register = async (req, res) => {
-  const { user_email, user_password } = req.body;
+  const { user_email, user_password, isowner } = req.body;
   try {
     const hashed_user_password = await hash(user_password, 10);
 
     await db.query(
-      "insert into users(user_email,user_password) values ($1 , $2)",
-      [user_email, hashed_user_password]
+      "insert into users(user_email,user_password,isowner) values ($1 , $2,$3)",
+      [user_email, hashed_user_password, isowner]
     );
 
     return res.status(201).json({

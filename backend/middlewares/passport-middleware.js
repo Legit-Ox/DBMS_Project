@@ -18,7 +18,7 @@ passport.use(
   new Strategy(opts, async ({ id }, done) => {
     try {
       const { rows } = await db.query(
-        "SELECT user_id, user_email FROM users WHERE user_id = $1",
+        "SELECT user_id, user_email,isowner FROM users WHERE user_id = $1",
         [id]
       );
 
@@ -26,7 +26,11 @@ passport.use(
         throw new Error("401 not authorized");
       }
 
-      let user = { user_id: rows[0].user_id, user_email: rows[0].user_email };
+      let user = {
+        user_id: rows[0].user_id,
+        user_email: rows[0].user_email,
+        isowner: rows[0].isowner,
+      };
 
       return await done(null, user);
     } catch (error) {
