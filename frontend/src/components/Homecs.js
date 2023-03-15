@@ -1,6 +1,6 @@
 import React from "react";
 
-const Home = () => {
+const Homecs = () => {
   return (
     <div className="w-full bg-gray-100 py-16 px-4">
       <div className="max-w-[1240px] h-[450px] mx-auto grid md:grid-cols-2">
@@ -63,4 +63,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Homecs;
