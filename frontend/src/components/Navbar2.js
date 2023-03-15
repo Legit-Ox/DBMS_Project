@@ -8,11 +8,14 @@ const Navbar2 = () => {
     const [Mobile, setMobile] = useState(false)
   return (
     <>
-    <nav className='navbar'>
+    <nav className='navbar my-2'>
         
         <h3 className='logo'>Plate Tracker</h3>
 
         <ul className={Mobile ? "nav-links-mobile" :"nav-links" } onClick={() => setMobile(false)}>
+            <Link to='/home' >
+                <li>Home</li>
+            </Link>
             <Link to='/table' >
                 <li>Table</li>
             </Link>

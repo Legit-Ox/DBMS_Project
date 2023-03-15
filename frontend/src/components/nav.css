@@ -36,6 +36,7 @@ li {
   margin: 0 10px;
   cursor: pointer;
   text-transform: capitalize;
+  transition: 0px 100px;
 }
 .hero {
   text-align: center;
