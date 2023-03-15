@@ -11,7 +11,7 @@ const Home = () => {
         />
         <div className="flex flex-col justify-start mx-2 my-auto">
           <h1 className="md:text-4xl sm:text-3xl text-7xl font-bold py-1 text-[#5f5c6d]">
-            La Pinoz Pizza
+            La Pino'z Pizza
           </h1>
           <div class="my-2 flex justify-start space-x-2">
             <button
