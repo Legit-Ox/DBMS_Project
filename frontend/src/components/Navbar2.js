@@ -16,11 +16,11 @@ const Navbar2 = () => {
             <Link to='/home' >
                 <li>Home</li>
             </Link>
-            <Link to='/table' >
-                <li>Table</li>
-            </Link>
             <Link to='/menu' >
                 <li>Menu</li>
+            </Link>
+            <Link to='/table' >
+                <li>Table</li>
             </Link>
             <Link to='/cart' >
                 <li>Cart</li>
