@@ -2,10 +2,12 @@ import React from "react";
 import { getAllRestaurants } from "../../api/restaurant";
 import Nav from "../../components/NavBar";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function HomePage() {
   const [restArray, setRestaurantArray] = useState([]);
-
+  let [redirectVar, changeRV] = useState(false);
+  let [id, changeId] = useState(null);
   const restaurantInfo = async () => {
     try {
       const { data } = await getAllRestaurants({});
@@ -20,6 +22,20 @@ function HomePage() {
     restaurantInfo();
   }, []);
   console.log("hello");
+  const navigate = useNavigate();
+  const goToSecondsComp = () => {
+    // This will navigate to second component
+    navigate(`/restaurant/${id}`);
+  };
+  function handleSubmit(event) {
+    event.preventDefault();
+    changeRV(true);
+    changeId(event.currentTarget.id);
+    // goToSecondsComp()
+  }
+  if (redirectVar) {
+    goToSecondsComp();
+  }
 
   return (
     <div className="">
@@ -27,7 +43,12 @@ function HomePage() {
 
       <div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
         {restArray.map((item, index) => (
-          <div key={index} className="rounded overflow-hidden shadow-lg">
+          <div
+            key={index}
+            className="rounded overflow-hidden shadow-lg"
+            onClick={handleSubmit}
+            id={item.rest_id}
+          >
             <img
               className="h-[370px] w-[500px] object-fill"
               src={item.rest_image}

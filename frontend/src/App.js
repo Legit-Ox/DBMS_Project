@@ -29,6 +29,7 @@ function App() {
         <Route path="/homepage" element={<HomePage />} />
         <Route path="/single" element={<SingleRestaurantPage />} />
         <Route path="/home2" element={<Home />} />
+        <Route path="/restaurant/:id" element={<SingleRestaurantPage />} />
 
         <Route element={<PrivateRoutes />}>
           <Route path="/dashboard" element={<Dashboard />} />

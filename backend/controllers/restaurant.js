@@ -95,3 +95,20 @@ exports.getAllRestaurants = async (req, res) => {
     console.log(error.message);
   }
 };
+//Write a function which gets the restaurant details based on params.id
+exports.getRestaurant = async (req, res) => {
+  try {
+    const results = await db.query(
+      "SELECT * FROM restaurants WHERE rest_id = $1",
+      [req.params.id]
+    );
+    res.status(200).json({
+      status: "success",
+      data: {
+        restaurant: results.rows[0],
+      },
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
