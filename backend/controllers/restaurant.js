@@ -56,17 +56,18 @@ exports.updateRestaurant = async (req, res) => {
   try {
     //cmon copilot
     const results = await db.query(
-      "UPDATE restaurants SET rest_name=$1,rest_veg=$2,rest_location=$3,rest_type=$4,rest_rating=$5,rest_image=$6,rest_description=$7 WHERE rest_owner_id=$8 returning *",
+      "UPDATE restaurants SET rest_name=$1,rest_veg=$2,rest_area=$3,rest_city=$9,rest_type=$4,rest_rating=$5,rest_image=$6,rest_description=$7 WHERE rest_owner_id=$8 returning *",
 
       [
         req.body.rest_name,
         req.body.rest_veg,
-        req.body.rest_location,
+        req.body.rest_area,
         req.body.rest_type,
         req.body.rest_rating,
         req.body.rest_image,
         req.body.rest_description,
         req.user.user_id,
+        req.body.rest_city,
       ]
     );
     console.log(results);
@@ -74,6 +75,37 @@ exports.updateRestaurant = async (req, res) => {
       status: "success",
       data: {
         restaurant: results.rows,
+      },
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+//Create a function getAllRestaurants to get an array of restaurants stored in the table
+exports.getAllRestaurants = async (req, res) => {
+  try {
+    const results = await db.query("SELECT * FROM restaurants");
+    res.status(200).json({
+      status: "success",
+      data: {
+        restaurants: results.rows,
+      },
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+//Write a function which gets the restaurant details based on params.id
+exports.getRestaurant = async (req, res) => {
+  try {
+    const results = await db.query(
+      "SELECT * FROM restaurants WHERE rest_id = $1",
+      [req.params.id]
+    );
+    res.status(200).json({
+      status: "success",
+      data: {
+        restaurant: results.rows[0],
       },
     });
   } catch (error) {
