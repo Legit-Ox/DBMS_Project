@@ -2,7 +2,7 @@ import React from "react";
 
 const Table = () => {
   return (
-    <div className="w-full bg-gray-100 py-8 px-4">
+    <div className="w-full bg-gray-100 py-8 px-4" id="table">
       <div className="flex-col justify-start mx-2 my-auto">
         <h1 className="text-[#303030] text-6xl mx-3">Table</h1>
       </div>

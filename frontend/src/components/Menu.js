@@ -18,7 +18,8 @@ const Menu = () => {
 
 
   return (
-    <div className="w-full bg-gray-100 py-8 px-4">
+      
+    <div className="w-full bg-gray-100 py-8 px-4" id="menu">
       <div className="flex-col justify-start mx-2 my-auto grid md:grid-cols-2">
         <h1 className="text-[#303030] text-6xl mx-3">MENU</h1>
         <div className="flex justify-end rounded my-2">
@@ -70,7 +71,7 @@ const Menu = () => {
             <div className="mx-1 my-2">
             <button
                 type="button"
-                class="pointer-events-none inline-block rounded bg-red-500 px-10 pt-1 pb-1 text-sm font-bold uppercase leading-normal text-white"
+                class="inline-block rounded bg-red-500 px-10 pt-1 pb-1 text-sm font-bold uppercase leading-normal text-white"
               >
                 Add
               </button>
