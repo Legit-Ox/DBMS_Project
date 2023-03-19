@@ -112,3 +112,21 @@ CREATE TABLE order_item(
     "order_id":"1",
     "menu_item_id":"1"
 }
+//Create a table named table which contains the availibility of tables in a restaurant
+CREATE TABLE tables(
+    table_id BIGSERIAL NOT NULL PRIMARY KEY,
+    table_name VARCHAR(50) NOT NULL,
+    table_status VARCHAR(50) NOT NULL,
+    table_capacity INT NOT NULL,
+    table_createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    table_updatedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    rest_id BIGINT NOT NULL,
+    FOREIGN KEY (rest_id) REFERENCES restaurants(rest_id)
+),
+{
+    "table_name":"Table 1",
+    "table_status":"available",
+    "table_capacity":"4",
+    "rest_id":"1"
+}
+
