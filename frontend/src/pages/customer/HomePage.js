@@ -21,7 +21,6 @@ function HomePage() {
   useEffect(() => {
     restaurantInfo();
   }, []);
-  console.log("hello");
   const navigate = useNavigate();
   const goToSecondsComp = () => {
     // This will navigate to second component
