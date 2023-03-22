@@ -3,12 +3,12 @@ const db = require("../db");
 exports.createTable = async (req, res) => {
   try {
     const results = await db.query(
-      "INSERT INTO tables (table_name,table_capacity,table_status,table_rest_id) VALUES ($1,$2,$3,$4) returning *",
+      "INSERT INTO tables (table_name,table_capacity,table_status,rest_id) VALUES ($1,$2,$3,$4) returning *",
       [
         req.body.table_name,
         req.body.table_capacity,
         req.body.table_status,
-        req.body.table_rest_id,
+        req.body.rest_id,
       ]
     );
     res.status(201).json({
@@ -25,14 +25,13 @@ exports.createTable = async (req, res) => {
 exports.getAvailableTables = async (req, res) => {
   try {
     const results = await db.query(
-      "SELECT COUNT(*) FROM tables WHERE table_status = 'available' AND table_rest_id = $1",
+      "SELECT COUNT(*) FROM tables WHERE table_status = 'available' AND rest_id = $1",
       [req.params.id]
     );
     res.status(200).json({
       status: "success",
-      data: {
-        table: results.rows[0],
-      },
+
+      table: results.rows[0],
     });
   } catch (error) {
     console.log(error.message);
@@ -42,14 +41,13 @@ exports.getAvailableTables = async (req, res) => {
 exports.getOccupiedTables = async (req, res) => {
   try {
     const results = await db.query(
-      "SELECT COUNT(*) FROM tables WHERE table_status = 'occupied' AND table_rest_id = $1",
+      "SELECT COUNT(*) FROM tables WHERE table_status = 'occupied' AND rest_id = $1",
       [req.params.id]
     );
     res.status(200).json({
       status: "success",
-      data: {
-        table: results.rows[0],
-      },
+
+      table: results.rows[0],
     });
   } catch (error) {
     console.log(error.message);
@@ -59,14 +57,13 @@ exports.getOccupiedTables = async (req, res) => {
 exports.getReservedTables = async (req, res) => {
   try {
     const results = await db.query(
-      "SELECT COUNT(*) FROM tables WHERE table_status = 'reserved' AND table_rest_id = $1",
+      "SELECT COUNT(*) FROM tables WHERE table_status = 'reserved' AND rest_id = $1",
       [req.params.id]
     );
     res.status(200).json({
       status: "success",
-      data: {
-        table: results.rows[0],
-      },
+
+      table: results.rows[0],
     });
   } catch (error) {
     console.log(error.message);
@@ -76,14 +73,13 @@ exports.getReservedTables = async (req, res) => {
 exports.getTables = async (req, res) => {
   try {
     const results = await db.query(
-      "SELECT COUNT(*) FROM tables WHERE table_rest_id = $1",
+      "SELECT COUNT(*) FROM tables WHERE rest_id = $1",
       [req.params.id]
     );
     res.status(200).json({
       status: "success",
-      data: {
-        table: results.rows[0],
-      },
+
+      table: results.rows[0],
     });
   } catch (error) {
     console.log(error.message);
@@ -94,7 +90,7 @@ exports.updateTableStatus = async (req, res) => {
   try {
     const results = await db.query(
       "UPDATE tables SET table_status = $1 WHERE table_id = $2 returning *",
-      [req.body.table_status, req.params.id]
+      [req.body.table_status, req.body.table_id]
     );
     res.status(200).json({
       status: "success",

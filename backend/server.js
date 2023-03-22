@@ -18,10 +18,12 @@ const authRoutes = require("./routes/auth");
 const restaurantRoutes = require("./routes/restaurant");
 const menuRoutes = require("./routes/menu");
 const orderRoutes = require("./routes/orders");
+const tableRoutes = require("./routes/table");
 app.use("/api/v1", authRoutes);
 app.use("/api/v1", restaurantRoutes);
 app.use("/api/v1", menuRoutes);
 app.use("/api/v1", orderRoutes);
+app.use("/api/v1", tableRoutes);
 
 // //Get a restaurant
 // app.get("/api/v1/restaurants/:id", async (req, res) => {

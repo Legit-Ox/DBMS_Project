@@ -71,6 +71,8 @@ CREATE TABLE menu_item(
     menu_item_createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     menu_item_updatedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 )
+//add a field menu_item_price in menu_item table
+
 {
     "menu_item_name":"Burger",
     "menu_item_image":"https://img.freepik.com/free-vector/burgers-restaurant-menu-template_23-2149005028.jpg?w=2000",
@@ -78,6 +80,9 @@ CREATE TABLE menu_item(
     "menu_item_category":"Main Course",
     "menu_item_quantity":"1 pc"
 }
+ALTER TABLE menu_item ADD menu_item_price INT,
+UPDATE menu_item SET menu_item_price=40 WHERE menu_item_id=2;
+ALTER TABLE menu_item ALTER COLUMN menu_item_price SET NOT NULL;
 //Create table order
 CREATE TABLE orders(
     order_id BIGSERIAL NOT NULL PRIMARY KEY,
