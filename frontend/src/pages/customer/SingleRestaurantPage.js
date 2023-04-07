@@ -1,9 +1,9 @@
+import Navbar2 from '../../components/Navbar2'
+import Homecs from '../../components/Homecs'
+import Table from '../../components/Table'
+import Menu from '../../components/Menu'
+import Cart from '../../components/Cart'
 import React, { useEffect, useState } from "react";
-import Navbar2 from "../../components/Navbar2";
-import Home from "../../components/Home";
-import Table from "../../components/Table";
-import Menu from "../../components/Menu";
-import Cart from "../../components/Cart";
 import { getSingleRestaurant } from "../../api/restaurant";
 import { useLocation } from "react-router-dom";
 import Hero from "../../components/Hero";
@@ -30,7 +30,8 @@ function SingleRestaurantPage() {
   return (
     <>
       <Navbar2 />
-      <Hero
+      <Homecs />
+      {/* <Hero
         rest_name={restaurant.rest_name}
         rest_image={restaurant.rest_image}
         rest_description={restaurant.rest_description}
@@ -39,8 +40,7 @@ function SingleRestaurantPage() {
         rest_city={restaurant.rest_city}
         rest_area={restaurant.rest_area}
         rest_rating={restaurant.rest_rating}
-      />
-      <Home />
+      /> */}
       <Menu />
       <Table />
       <Cart />

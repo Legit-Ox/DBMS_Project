@@ -1,8 +1,8 @@
 import React from "react";
 
-const Home = () => {
+const Homecs = () => {
   return (
-    <div className="w-full bg-gray-100 py-16 px-4">
+    <div className="w-full bg-gray-100 py-16 px-4" id="home">
       <div className="max-w-[1240px] h-[450px] mx-auto grid md:grid-cols-2">
         <img
           className="w-[550px] h-[400px] mx-3 my-auto inline-block rounded-xl"
@@ -70,4 +70,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Homecs;
