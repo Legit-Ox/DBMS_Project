@@ -39,8 +39,9 @@ function App() {
         <Route element={<RestrictedRoutes />}>
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/landing2" element={<Landing2 />} />
+          
         </Route>
+        <Route path="/landing2" element={<Landing2 />} />
       </Routes>
     </div>
   );
