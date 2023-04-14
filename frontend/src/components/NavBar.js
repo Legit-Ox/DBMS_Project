@@ -5,7 +5,15 @@ import { unauthenticateUser } from "../redux/slices/authSlice";
 
 const Nav = () => {
   const dispatch = useDispatch();
-  let [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen2, setIsOpen2] = useState(false);
+  const [isOpen3, setIsOpen3] = useState(false);
+  const [isOpen4, setIsOpen4] = useState(false);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+  const toggleMenu2 = () => setIsOpen2(!isOpen2);
+  const toggleMenu3 = () => setIsOpen3(!isOpen3);
+  const toggleMenu4 = () => setIsOpen4(!isOpen4);
   const logout = async () => {
     try {
       await onLogout();
@@ -43,91 +51,186 @@ const Nav = () => {
 
       <div className="menu w-full  flex-grow lg:flex lg:items-center lg:w-auto lg:px-3 px-8">
         <div className="text-md font-bold text-blue-700 lg:flex-grow">
-          {/* <a
-            href="#"
-            className="block mt-4 lg:inline-block lg:mt-0 hover:text-white px-4 py-2 rounded hover:bg-blue-700 mr-2"
-          >
-            Menu 1
-          </a> */}
 
-          <button
-            id="dropdownDefaultButton"
-            data-dropdown-toggle="dropdown"
-            class=" bg-white-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 text-blue-700 hover:text-white"
-            type="button"
-          >
-            Dropdown button{" "}
-            <svg
-              class="w-4 h-4 ml-2"
-              aria-hidden="true"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
+          <div className="inline-block
+          ">
+      <button
+        className="text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center"
+        onClick={toggleMenu}
+      >
+        <span className="mr-1">City</span>
+        <svg
+          className="fill-current h-4 w-4"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+        >
+          <path
+            fillRule="evenodd"
+            d="M6.928 9.172a.5.5 0 0 1 .707 0L10 11.793l2.364-2.621a.5.5 0 0 1 .707 0l.707.707a.5.5 0 0 1 0 .707l-3.536 3.899a.5.5 0 0 1-.707 0l-3.536-3.899a.5.5 0 0 1 0-.707l.707-.707z"
+          />
+        </svg>
+      </button>
+      {isOpen && (
+        <div className="absolute mt-2 w-56 float-right rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+          <div className="py-1">
+            <a
+              href="#"
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M19 9l-7 7-7-7"
-              ></path>
-            </svg>
-          </button>
-          <div
-            id="dropdown"
-            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 "
-          >
-            <ul
-              class="py-2 text-sm text-gray-700 dark:text-gray-200"
-              aria-labelledby="dropdownDefaultButton"
+              Ahmedabad
+            </a>
+            <a
+              href="#"
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
             >
-              <li>
-                <a
-                  href="#"
-                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                >
-                  Dashboard
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                >
-                  Settings
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                >
-                  Earnings
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                >
-                  Sign out
-                </a>
-              </li>
-            </ul>
+              Mumbai
+            </a>
+            <a
+              href="#"
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >
+              Delhi
+            </a>
           </div>
+        </div>
+      )}
+    </div>
 
-          <a
-            href="#"
-            className=" block mt-4 lg:inline-block lg:mt-0 hover:text-white px-4 py-2 rounded hover:bg-blue-700 mr-2"
-          >
-            Menu 2
-          </a>
-          <a
-            href="#"
-            className="block mt-4 lg:inline-block lg:mt-0 hover:text-white px-4 py-2 rounded hover:bg-blue-700 mr-2"
-          >
-            Menu 3
-          </a>
+    <button
+        className="text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center"
+        onClick={toggleMenu2}
+      >
+        <span className="mr-1">Type</span>
+        <svg
+          className="fill-current h-4 w-4"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+        >
+          <path
+            fillRule="evenodd"
+            d="M6.928 9.172a.5.5 0 0 1 .707 0L10 11.793l2.364-2.621a.5.5 0 0 1 .707 0l.707.707a.5.5 0 0 1 0 .707l-3.536 3.899a.5.5 0 0 1-.707 0l-3.536-3.899a.5.5 0 0 1 0-.707l.707-.707z"
+          />
+        </svg>
+      </button>
+      {isOpen2 && (
+        <div className="absolute mt-2 w-56 float-right rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+          <div className="py-1">
+            <a
+              href="#"
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >
+              Punjabi
+            </a>
+            <a
+              href="#"
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >
+              Inter-Continental
+            </a>
+            <a
+              href="#"
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >
+              South Indian
+            </a>
+          </div>
+        </div>
+      )}
+
+<button
+        className="text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center"
+        onClick={toggleMenu3}
+      >
+        <span className="mr-1">Veg/Non-Veg</span>
+        <svg
+          className="fill-current h-4 w-4"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+        >
+          <path
+            fillRule="evenodd"
+            d="M6.928 9.172a.5.5 0 0 1 .707 0L10 11.793l2.364-2.621a.5.5 0 0 1 .707 0l.707.707a.5.5 0 0 1 0 .707l-3.536 3.899a.5.5 0 0 1-.707 0l-3.536-3.899a.5.5 0 0 1 0-.707l.707-.707z"
+          />
+        </svg>
+      </button>
+      {isOpen3 && (
+        <div className="absolute mt-2 w-56 float-right rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+          <div className="py-1">
+            <a
+              href="#"
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >
+              Veg
+            </a>
+            <a
+              href="#"
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >
+              Non-Veg
+            </a>
+            <a
+              href="#"
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >
+              Both
+            </a>
+          </div>
+        </div>
+      )}
+
+<button
+        className="text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center"
+        onClick={toggleMenu4}
+      >
+        <span className="mr-1">Rating</span>
+        <svg
+          className="fill-current h-4 w-4"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+        >
+          <path
+            fillRule="evenodd"
+            d="M6.928 9.172a.5.5 0 0 1 .707 0L10 11.793l2.364-2.621a.5.5 0 0 1 .707 0l.707.707a.5.5 0 0 1 0 .707l-3.536 3.899a.5.5 0 0 1-.707 0l-3.536-3.899a.5.5 0 0 1 0-.707l.707-.707z"
+          />
+        </svg>
+      </button>
+      {isOpen4 && (
+        <div className="absolute mt-2 w-56 float-right rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+          <div className="py-1">
+            <a
+              href="#"
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >
+              1 star
+            </a>
+            <a
+              href="#"
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >
+              2 star
+            </a>
+            <a
+              href="#"
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >
+              3 star
+            </a>
+            <a
+              href="#"
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >
+              4 star
+            </a>
+            <a
+              href="#"
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >
+              5 star
+            </a>
+          </div>
+        </div>
+      )}
+          
         </div>
 
         <div className="relative mx-auto text-gray-700 lg:block hidden">
