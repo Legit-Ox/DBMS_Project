@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import 'flowbite';
 import { useDispatch } from "react-redux";
 import { onLogout } from "../api/auth";
 import { unauthenticateUser } from "../redux/slices/authSlice";

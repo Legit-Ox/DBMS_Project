@@ -9,6 +9,6 @@ const { userAuth } = require("../middlewares/auth-middleware");
 const router = Router();
 router.post("/createMenu", userAuth, createMenu);
 router.post("/createMenuItem", userAuth, createMenuItem);
-router.get("/getMenu", userAuth, getMenu);
-router.get("/getMenuItems", userAuth, getMenuItem);
+router.get("/getMenu/:rest_id", userAuth, getMenu);
+router.get("/getMenuItems/:rest_id", userAuth, getMenuItem);
 module.exports = router;
