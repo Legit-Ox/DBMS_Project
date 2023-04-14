@@ -62,7 +62,7 @@ exports.createMenuItem = async (req, res) => {
   try {
     if (req.user.isowner) {
       const results = await db.query(
-        "INSERT INTO menu_item (menu_item_name,menu_item_image,menu_item_description,menu_item_category,menu_item_quantity,menu_item_price,menu_id) SELECT $1 ,$2,$3,$4,$5,$6, m.menu_id FROM menu m WHERE m.rest_id = (SELECT r.rest_id FROM restaurants r WHERE r.rest_owner_id = $7 LIMIT 1) LIMIT 1; ",
+        "INSERT INTO menu_item (menu_item_name,menu_item_image,menu_item_description,menu_item_category,menu_item_price,menu_item_quantity,menu_id) SELECT $1 ,$2,$3,$4,$5,$6, m.menu_id FROM menu m WHERE m.rest_id = (SELECT r.rest_id FROM restaurants r WHERE r.rest_owner_id = $7 LIMIT 1) LIMIT 1; ",
         [
           req.body.menu_item_name,
           req.body.menu_item_image,
@@ -100,7 +100,7 @@ exports.getMenuItem = async (req, res) => {
   console.log("get a Menu Item");
   try {
     const results = await db.query(
-      "SELECT mi.menu_item_id, mi.menu_item_name, mi.menu_item_image, mi.menu_item_description, mi.menu_item_category, mi.menu_item_quantity,mi.menu_item_price FROM menu_item mi WHERE mi.menu_id = (SELECT m.menu_id FROM menu m WHERE m.rest_id = $1 LIMIT 1) LIMIT 1; ",
+      "SELECT mi.menu_item_id, mi.menu_item_name, mi.menu_item_image, mi.menu_item_description, mi.menu_item_category, mi.menu_item_quantity,mi.menu_item_price FROM menu_item mi WHERE mi.menu_id = (SELECT m.menu_id FROM menu m WHERE m.rest_id = $1 LIMIT 1); ",
       [req.params.rest_id]
     );
     res.status(201).json({

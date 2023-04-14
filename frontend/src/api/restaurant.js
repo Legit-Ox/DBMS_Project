@@ -30,3 +30,12 @@ export async function getReservedTablesAPI(id) {
     `http://localhost:3006/api/v1/getReservedTables/${id}`
   );
 }
+export async function createCart() {
+  return await axios.post(`http://localhost:3006/api/v1/getCart`);
+}
+
+export async function addCartItemFrontend(cartId, menuItemId) {
+  return await axios.post(
+    `http://localhost:3006/api/v1/addCartItem?cartId=${cartId}&menuItemId=${menuItemId}`
+  );
+}

@@ -1,21 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { getMenuDetails, getMenuItems } from "../api/restaurant";
+import {
+  addCartItemFrontend,
+  createCart,
+  getMenuDetails,
+  getMenuItems,
+} from "../api/restaurant";
 
 const Menu = (props) => {
-  const [quantity, setQuantity] = useState(1);
-
-  const handleDecrement = () => {
-    if (quantity > 1) {
-      setQuantity((prevCount) => prevCount - 1);
-    }
-  };
-
-  const handleIncrement = () => {
-    if (quantity < 20) {
-      setQuantity((prevCount) => prevCount + 1);
-    }
-  };
-
   const [menu, setmenuArray] = useState([]);
   const menuInfo = async () => {
     try {
@@ -33,7 +24,28 @@ const Menu = (props) => {
 
       // setmenuItemsArray(JSON.parse(menuItemsData.data));
       setmenuItemsArray(JSON.parse(menuItemsData.data.data));
-      // console.log(JSON.parse(menuItemsData.data.data));
+      console.log(JSON.parse(menuItemsData.data.data));
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  const [cartId, setCartId] = useState("");
+  const createUserCart = async () => {
+    try {
+      const cartData = await createCart();
+      setCartId(cartData.data.cart_id);
+      console.log(cartId);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  // const [cartId, setCartId] = useState("");
+  const addCartItemFunction = async (currCartId, cartMenuItemId) => {
+    try {
+      const cartItemData = await addCartItemFrontend(
+        currCartId,
+        cartMenuItemId
+      );
     } catch (error) {
       console.log(error.message);
     }
@@ -58,6 +70,13 @@ const Menu = (props) => {
           />
           <button className="px-4 text-white bg-gray-800 border-l rounded mx-1">
             Search
+          </button>
+
+          <button
+            className="px-4  text-white bg-gray-800 border-l rounded mr-1"
+            onClick={createUserCart}
+          >
+            Make a cart
           </button>
         </div>
       </div>
@@ -98,7 +117,7 @@ const Menu = (props) => {
               <div className="mx-1 my-1 font-sans text-lg font-bold ">
                 &#x20B9; {item.menu_item_price}
               </div>
-              <div className="mx-1 my-1 input-group">
+              {/* <div className="mx-1 my-1 input-group">
                 <button
                   type="button"
                   onClick={handleDecrement}
@@ -114,10 +133,11 @@ const Menu = (props) => {
                 >
                   +
                 </button>
-              </div>
+              </div> */}
               <div className="mx-1 my-2">
                 <button
                   type="button"
+                  onClick={addCartItemFunction(cartId, item.menu_item_id)}
                   class="inline-block rounded bg-red-500 px-10 pt-1 pb-1 text-sm font-bold uppercase leading-normal text-white"
                 >
                   Add
