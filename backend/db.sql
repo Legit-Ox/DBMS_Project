@@ -71,6 +71,8 @@ CREATE TABLE menu_item(
     menu_item_createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     menu_item_updatedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 )
+//add a field menu_item_price in menu_item table
+
 {
     "menu_item_name":"Burger",
     "menu_item_image":"https://img.freepik.com/free-vector/burgers-restaurant-menu-template_23-2149005028.jpg?w=2000",
@@ -78,6 +80,34 @@ CREATE TABLE menu_item(
     "menu_item_category":"Main Course",
     "menu_item_quantity":"1 pc"
 }
+{
+    "menu_item_name":"Pizza",
+    "menu_item_image":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg",
+    "menu_item_description":"Pizza Description xyz lorem ipsumId duis occaecat eiusmod aliquip magna dolore Lorem ea Lorem sunt qui. Deserunt ullamco labore veniam mollit adipisicing irure do magna nostrud enim cillum. Elit eu cillum pariatur enim irure nostrud. Esse qui exercitation dolor laborum.",
+    "menu_item_category":"Main Course",
+    "menu_item_price":"40",
+    "menu_item_quantity":"1 pc"
+}
+
+
+
+
+
+
+
+
+
+
+ALTER TABLE menu_item ADD menu_item_price INT,
+UPDATE menu_item SET menu_item_price=40 WHERE menu_item_id=2;
+ALTER TABLE menu_item ALTER COLUMN menu_item_price SET NOT NULL;
+//Alter table to alter the column menu_item_image from varchar to TEXT
+
+ALTER TABLE menu_item ALTER COLUMN menu_item_image TYPE TEXT;
+//Alter table to alter the column menu_item_quantity to varchar
+ALTER TABLE menu_item ALTER COLUMN menu_item_quantity TYPE VARCHAR(100);
+
+
 //Create table order
 CREATE TABLE orders(
     order_id BIGSERIAL NOT NULL PRIMARY KEY,
@@ -110,5 +140,62 @@ CREATE TABLE order_item(
     "order_item_quantity":"1",
     "order_item_price":"100",
     "order_id":"1",
+    "menu_item_id":"1"
+}
+//Create a table named table which contains the availibility of tables in a restaurant
+CREATE TABLE tables(
+    table_id BIGSERIAL NOT NULL PRIMARY KEY,
+    table_name VARCHAR(50) NOT NULL,
+    table_status VARCHAR(50) NOT NULL,
+    table_capacity INT NOT NULL,
+    table_createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    table_updatedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    rest_id BIGINT NOT NULL,
+    FOREIGN KEY (rest_id) REFERENCES restaurants(rest_id)
+),
+{
+    "table_name":"Table 1",
+    "table_status":"available",
+    "table_capacity":"4",
+    "rest_id":"1"
+}
+
+//Create a cart table
+CREATE TABLE cart(
+    cart_id BIGSERIAL NOT NULL PRIMARY KEY,
+    cart_total INT NOT NULL,
+    cart_createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    cart_updatedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    user_id BIGINT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+),
+//To add rest_id as a fk
+ALTER TABLE cart ADD COLUMN rest_id BIGINT,
+ALTER TABLE cart ADD FOREIGN KEY (rest_id) REFERENCES restaurants(rest_id),
+//To remove not null in cart
+ALTER TABLE cart ALTER COLUMN cart_total DROP NOT NULL,
+//To add default 0 in cart_total
+ALTER TABLE cart ALTER COLUMN cart_total SET DEFAULT 0, 
+
+{
+    "cart_total":"100",
+    "user_id":"1"
+}
+//Create a cart_item table
+CREATE TABLE cart_item(
+    cart_item_id BIGSERIAL NOT NULL PRIMARY KEY,
+    cart_item_quantity INT NOT NULL,
+    cart_item_createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    cart_item_updatedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    cart_id BIGINT NOT NULL,
+    FOREIGN KEY (cart_id) REFERENCES cart(cart_id),
+    menu_item_id BIGINT NOT NULL,
+    FOREIGN KEY (menu_item_id) REFERENCES menu_item(menu_item_id)
+),
+-- alter cart_item_quantity to be default 0
+ALTER TABLE cart_item ALTER COLUMN cart_item_quantity SET DEFAULT 0;
+{
+    "cart_item_quantity":"1",
+    "cart_id":"1",
     "menu_item_id":"1"
 }

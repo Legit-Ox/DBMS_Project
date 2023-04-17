@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import HomePage from "./pages/customer/HomePage";
 import OwnerHome from "./pages/restaurant/owner_home";
 import Rough from "./pages/restaurant/rough";
+import Landing2 from "./pages/landing2";
 const PrivateRoutes = () => {
   const { isAuth } = useSelector((state) => state.auth);
 
@@ -39,7 +40,9 @@ function App() {
         <Route element={<RestrictedRoutes />}>
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          
         </Route>
+        <Route path="/landing2" element={<Landing2 />} />
       </Routes>
     </div>
   );
