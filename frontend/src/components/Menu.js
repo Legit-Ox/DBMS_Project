@@ -137,7 +137,7 @@ const Menu = (props) => {
               <div className="mx-1 my-2">
                 <button
                   type="button"
-                  onClick={addCartItemFunction(cartId, item.menu_item_id)}
+                  // onClick={addCartItemFunction(cartId, item.menu_item_id)}
                   class="inline-block rounded bg-red-500 px-10 pt-1 pb-1 text-sm font-bold uppercase leading-normal text-white"
                 >
                   Add
