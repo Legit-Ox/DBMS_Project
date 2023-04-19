@@ -5,6 +5,7 @@ import { MdRestaurantMenu } from "react-icons/md";
 import { MdTableRestaurant } from "react-icons/md";
 import { FiFolder, FiShoppingCart } from "react-icons/fi";
 import { MdLogout } from "react-icons/md";
+import { MdCreate } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 function OrderRs() {
@@ -13,7 +14,7 @@ function OrderRs() {
     { name: "Menu", link: "/menu", icon: MdRestaurantMenu },
     { name: "Orders", link: "/orders", icon: FiShoppingCart },
     { name: "Table", link: "/table", icon: MdTableRestaurant, margin: true },
-    { name: "Customer", link: "/customer", icon: FiFolder },
+    { name: "Create", link: "/customer", icon: MdCreate },
     { name: "Logout", link: "/", icon: MdLogout },
   ];
   const [open, setOpen] = useState(true);
@@ -76,7 +77,72 @@ function OrderRs() {
             </button>
           </div>
         </div>
-        <div>Order</div>
+        <div className="w-full bg-white py-8 px-4">
+          <div className="flex-col justify-start my-auto">
+            <h1 className="text-[#131212] text-4xl mx-1">Orders</h1>
+          </div>
+          <div className="mx-2 my-3 bg-slate-200 gap-4">
+          <div className="my-1 mx-1 text-xl"> Order Id: #101214</div> <hr />
+          <div className="my-2 mx-2 text-xl"> Items Ordered : </div> <br />
+          <div className="grid md:grid-cols-2 mx-2 my-1 flex-col">
+            <div className="mx-1 my-auto font-sans text-2xl  font-semibold text-[#474554] justify-self-center">
+              Items
+            </div>
+            <div className="mx-1 my-auto font-sans text-2xl  font-semibold text-[#474554] justify-self-center">
+              Quantity
+            </div>
+          </div>
+          {/*Loop of the items that are ordered */}
+          <div className="grid md:grid-cols-2 mx-2 my-1 flex-col">
+            <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
+            Margerita
+            </div>
+            <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
+              1
+            </div>
+          </div>  
+          <div className="grid md:grid-cols-2 mx-2 my-1 flex-col">
+            <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
+            Pizza
+            </div>
+            <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
+              2
+            </div>
+          </div>  
+          <div className="grid md:grid-cols-2 mx-2 my-1 flex-col">
+            <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
+            CoCo Cola
+            </div>
+            <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
+              2
+            </div>
+          </div>     
+          
+           <hr />
+          {/*Loop ends */}
+          <div className="my-1 mx-1 text-xl"> Total Amount : &#x20B9; 800</div> <hr />
+          <div className="grid md:grid-cols-4 mx-2 my-3 flex-col">
+            <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
+           Status
+            </div>
+            <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
+              Pending 
+            </div>
+            <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
+            <input type="text" placeholder="Update" class="px-2 py-1 placeholder-slate-300 text-slate-600 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"/>
+            </div>
+            <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
+              <button
+                type="button"
+                // onClick={addCartItemFunction(cartId, item.menu_item_id)}
+                class="inline-block rounded bg-green-700 px-10 pt-1 pb-1 text-sm font-bold uppercase leading-normal text-white"
+              >
+                Update
+              </button>
+            </div>
+          </div>   
+           </div>
+        </div>
       </div>
     </section>
   );

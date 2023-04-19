@@ -3,9 +3,11 @@ import { HiMenuAlt3 } from "react-icons/hi";
 import { MdOutlineDashboard } from "react-icons/md";
 import { MdRestaurantMenu } from "react-icons/md";
 import { MdTableRestaurant } from "react-icons/md";
+import { MdCreate } from "react-icons/md";
 import { FiFolder, FiShoppingCart } from "react-icons/fi";
 import { MdLogout } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function CustomerRs() {
   const menus = [
@@ -13,9 +15,10 @@ function CustomerRs() {
     { name: "Menu", link: "/menu", icon: MdRestaurantMenu },
     { name: "Orders", link: "/orders", icon: FiShoppingCart },
     { name: "Table", link: "/table", icon: MdTableRestaurant, margin: true },
-    { name: "Customer", link: "/customer", icon: FiFolder },
+    { name: "Create", link: "/customer", icon: MdCreate },
     { name: "Logout", link: "/", icon: MdLogout },
   ];
+  const navigate = useNavigate();
   const [open, setOpen] = useState(true);
   return (
     <section className="flex gap-6">
@@ -76,7 +79,27 @@ function CustomerRs() {
             </button>
           </div>
         </div>
-        <div>Customer</div>
+        <div className="w-full bg-white py-8 px-4">
+          <div className="flex-col justify-start my-auto">
+            <h1 className="text-[#131212] text-4xl mx-1">Create </h1>
+          </div>
+          <div className="mx-4 my-4 flex-col">
+          <div className="mx-5 my-auto justify-center">
+              <button onClick={() => navigate("/createRestaurant")}
+                type="button"
+                class=" rounded inline-block bg-red-500 px-10 pt-1 pb-1 mx-2 text-base w-101 font-normal leading-normal text-white"
+              >
+                Create Restaurant 
+              </button>
+              <button onClick={() => navigate("/createMenu")}
+                type="button"
+                class=" rounded inline-block bg-green-500 px-10 pt-1 pb-1 mx-2 text-base w-56 font-normal leading-normal text-white"
+              >
+                Create Menu 
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

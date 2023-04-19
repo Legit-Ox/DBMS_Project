@@ -4,6 +4,7 @@ import { MdOutlineDashboard } from "react-icons/md";
 import { MdRestaurantMenu } from "react-icons/md";
 import { MdTableRestaurant } from "react-icons/md";
 import { MdLogout } from "react-icons/md";
+import { MdCreate } from "react-icons/md";
 import { FiFolder, FiShoppingCart } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
@@ -13,7 +14,7 @@ const OwnerHome = () => {
     { name: "Menu", link: "/menu", icon: MdRestaurantMenu },
     { name: "Orders", link: "/orders", icon: FiShoppingCart },
     { name: "Table", link: "/table", icon: MdTableRestaurant, margin: true },
-    { name: "Customer", link: "/customer", icon: FiFolder },
+    { name: "Create", link: "/customer", icon: MdCreate },
     { name: "Logout", link: "/", icon: MdLogout },
   ];
   const [open, setOpen] = useState(true);
