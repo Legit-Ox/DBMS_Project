@@ -1,22 +1,21 @@
 import React, { useState } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { MdOutlineDashboard } from "react-icons/md";
-import { RiSettings4Line } from "react-icons/ri";
-import { TbReportAnalytics } from "react-icons/tb";
-import { AiOutlineUser, AiOutlineHeart } from "react-icons/ai";
-import { FiMessageSquare, FiFolder, FiShoppingCart } from "react-icons/fi";
+import { MdRestaurantMenu } from "react-icons/md";
+import { MdTableRestaurant } from "react-icons/md";
+import { MdLogout } from "react-icons/md";
+import { MdCreate } from "react-icons/md";
+import { FiFolder, FiShoppingCart } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 const OwnerHome = () => {
   const menus = [
-    { name: "dashboard", link: "/ownerHome", icon: MdOutlineDashboard},
-    { name: "user", link: "/", icon: AiOutlineUser },
-    { name: "messages", link: "/", icon: FiMessageSquare },
-    { name: "analytics", link: "/", icon: TbReportAnalytics, margin: true },
-    { name: "File Manager", link: "/", icon: FiFolder },
-    { name: "Cart", link: "/", icon: FiShoppingCart },
-    { name: "Saved", link: "/", icon: AiOutlineHeart, margin: true },
-    { name: "Setting", link: "/", icon: RiSettings4Line },
+    { name: "Dashboard", link: "/ownerHome", icon: MdOutlineDashboard },
+    { name: "Menu", link: "/menu", icon: MdRestaurantMenu },
+    { name: "Orders", link: "/orders", icon: FiShoppingCart },
+    { name: "Table", link: "/table", icon: MdTableRestaurant, margin: true },
+    { name: "Create", link: "/customer", icon: MdCreate },
+    { name: "Logout", link: "/", icon: MdLogout },
   ];
   const [open, setOpen] = useState(true);
   return (
@@ -64,8 +63,165 @@ const OwnerHome = () => {
           ))}
         </div>
       </div>
-      <div className="m-3 text-xl text-gray-900 font-semibold">
-        REACT TAILWIND
+      <div className="m-3 w-full">
+        <div className="m-3 w-full text-black text font-semibold flex-col justify-start grid md:grid-cols-2">
+          <div className="justify-start my-2 text-4xl">Plate Tracker</div>
+          <div className="flex justify-end rounded my-2">
+            <input
+              type="text"
+              className="block w-[400px] h-[35px] px-4 py-2 text-[#0c0c0c] bg-white border rounded-md"
+              placeholder="Search..."
+            />
+            <button className="px-4 h-[35px] text-white bg-gray-800 border-l rounded mx-1">
+              Search
+            </button>
+          </div>
+        </div>
+        <div className="w-full bg-white py-8 px-4">
+          <div className="flex-col justify-start my-auto">
+            <h1 className="text-[#303030] text-4xl mx-1">Order Status:</h1>
+          </div>
+          <div className="grid md:grid-cols-2 mx-4 my-4 flex-col">
+            <div className="mx-2 my-auto font-sans text-2xl font-semibold text-[#474554] justify-self-end">
+              Total Orders:
+            </div>
+            <div className="mx-2 my-auto">
+              <button
+                type="button"
+                class="pointer-events-none  rounded inline-block bg-slate-400 px-10 pt-1 pb-1 text-base w-56 font-normal uppercase leading-normal text-white"
+              >
+                30
+              </button>
+            </div>
+          </div>
+          <div className="grid md:grid-cols-2 mx-4 my-4 flex-col">
+            <div className="mx-2 my-auto font-sans text-2xl font-semibold text-[#474554] justify-self-end">
+              Order Pending:
+            </div>
+            <div className="mx-2 my-auto">
+              <button
+                type="button"
+                class="pointer-events-none  rounded inline-block bg-slate-400 px-10 pt-1 pb-1 text-base w-56 font-normal uppercase leading-normal text-white"
+              >
+                10
+              </button>
+            </div>
+          </div>
+          <div className="grid md:grid-cols-2 mx-4 my-4 flex-col">
+            <div className="mx-2 my-auto font-sans text-2xl font-semibold text-[#474554] justify-self-end">
+              Order in Process:
+            </div>
+            <div className="mx-2 my-auto">
+              <button
+                type="button"
+                class="pointer-events-none  rounded inline-block bg-slate-400 px-10 pt-1 pb-1 text-base w-56 font-normal uppercase leading-normal text-white"
+              >
+                10
+              </button>
+            </div>
+          </div>
+          <div className="grid md:grid-cols-2 mx-4 my-4 flex-col">
+            <div className="mx-2 my-auto font-sans text-2xl font-semibold text-[#474554] justify-self-end">
+              Order Completed:
+            </div>
+            <div className="mx-2 my-auto">
+              <button
+                type="button"
+                class="pointer-events-none  rounded inline-block bg-slate-400 px-10 pt-1 pb-1 text-base w-56 font-normal uppercase leading-normal text-white"
+              >
+                10
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="w-full bg-white py-4 px-4">
+          <div className="flex-col justify-start my-auto">
+            <h1 className="text-[#303030] text-4xl mx-1">Revenue Status:</h1>
+          </div>
+          <div className="grid md:grid-cols-2 mx-4 my-4 flex-col">
+            <div className="mx-2 my-auto font-sans text-2xl font-semibold text-[#474554] justify-self-end">
+              Total Revenue:
+            </div>
+            <div className="mx-2 my-auto">
+              <button
+                type="button"
+                class="pointer-events-none  rounded inline-block bg-slate-400 px-10 pt-1 pb-1 text-base w-56 font-normal uppercase leading-normal text-white"
+              >
+                &#8377; 8500
+              </button>
+            </div>
+          </div>
+          <div className="grid md:grid-cols-2 mx-4 my-4 flex-col">
+            <div className="mx-2 my-auto font-sans text-2xl font-semibold text-[#474554] justify-self-end">
+              No. Of Items Sell:
+            </div>
+            <div className="mx-2 my-auto">
+              <button
+                type="button"
+                class="pointer-events-none  rounded inline-block bg-slate-400 px-10 pt-1 pb-1 text-base w-56 font-normal uppercase leading-normal text-white"
+              >
+                30
+              </button>
+            </div>
+          </div>
+          <div className="grid md:grid-cols-2 mx-4 my-4 flex-col">
+            <div className="mx-2 my-auto font-sans text-2xl font-semibold text-[#474554] justify-self-end">
+              No. of Items Remaining:
+            </div>
+            <div className="mx-2 my-auto">
+              <button
+                type="button"
+                class="pointer-events-none  rounded inline-block bg-slate-400 px-10 pt-1 pb-1 text-base w-56 font-normal uppercase leading-normal text-white"
+              >
+                120
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="w-full bg-white py-4 px-4">
+          <div className="flex-col justify-start my-auto">
+            <h1 className="text-[#303030] text-4xl mx-1">Customer Status:</h1>
+          </div>
+          <div className="grid md:grid-cols-2 mx-4 my-4 flex-col">
+            <div className="mx-2 my-auto font-sans text-2xl font-semibold text-[#474554] justify-self-end">
+              Total Customer Visited:
+            </div>
+            <div className="mx-2 my-auto">
+              <button
+                type="button"
+                class="pointer-events-none  rounded inline-block bg-slate-400 px-10 pt-1 pb-1 text-base w-56 font-normal uppercase leading-normal text-white"
+              >
+                50
+              </button>
+            </div>
+          </div>
+          <div className="grid md:grid-cols-2 mx-4 my-4 flex-col">
+            <div className="mx-2 my-auto font-sans text-2xl font-semibold text-[#474554] justify-self-end">
+              Total Customer Order food:
+            </div>
+            <div className="mx-2 my-auto">
+              <button
+                type="button"
+                class="pointer-events-none  rounded inline-block bg-slate-400 px-10 pt-1 pb-1 text-base w-56 font-normal uppercase leading-normal text-white"
+              >
+                20
+              </button>
+            </div>
+          </div>
+          <div className="grid md:grid-cols-2 mx-4 my-4 flex-col">
+            <div className="mx-2 my-auto font-sans text-2xl font-semibold text-[#474554] justify-self-end">
+              No. of Customer Waiting:
+            </div>
+            <div className="mx-2 my-auto">
+              <button
+                type="button"
+                class="pointer-events-none  rounded inline-block bg-slate-400 px-10 pt-1 pb-1 text-base w-56 font-normal uppercase leading-normal text-white"
+              >
+                5
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
