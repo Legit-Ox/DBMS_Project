@@ -18,25 +18,16 @@ function App() {
   return (
     <div className="">
       <Routes>
-<<<<<<< HEAD
+        <Route path="/ownerHome" element={<OwnerHome />} />
+
         <Route path="/landing2" element={<Landing2 />} />
-=======
->>>>>>> 4e4c1511b879e52f0ec864978a03cff11aa214ac
         <Route path="/landing" element={<LandingPage />} />
 
         <Route path="/single" element={<SingleRestaurantPage />} />
         <Route path="/home2" element={<Home />} />
         <Route path="/restaurant/:id" element={<SingleRestaurantPage />} />
-<<<<<<< HEAD
 
         <Route path="/dashboard" element={<Dashboard />} />
-=======
-        <Route path="/ownerHome" element={<OwnerHome />} />
-        <Route path="/private" element={<Rough />} />
-        <Route element={<PrivateRoutes />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Route>
->>>>>>> 4e4c1511b879e52f0ec864978a03cff11aa214ac
 
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />

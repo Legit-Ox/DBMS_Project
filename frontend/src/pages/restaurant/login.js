@@ -29,7 +29,7 @@ const Login = () => {
         .post("http://localhost:3006/api/v1/login", values)
         .then((response) => {
           response.data.isOwner.isOwner
-            ? navigate("/dashboard")
+            ? navigate("/ownerHome")
             : navigate("/homepage");
         });
       dispatch(authenticateUser());
