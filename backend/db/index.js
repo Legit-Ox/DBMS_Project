@@ -1,4 +1,3 @@
-//Copilot write the initial code for pool
 const { Pool } = require("pg");
 const pool = new Pool({
   user: "my_user",
