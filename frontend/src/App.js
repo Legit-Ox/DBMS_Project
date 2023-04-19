@@ -32,8 +32,7 @@ function App() {
         <Route path="/table" element={<TableRs />} />
         <Route path="/customer" element={<CustomerRs />} />
         <Route path="/private" element={<Rough />} />
-       
-          <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         
 
         <Route path="/register" element={<Register />} />
