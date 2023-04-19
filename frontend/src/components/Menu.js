@@ -5,6 +5,7 @@ import {
   getMenuDetails,
   getMenuItems,
 } from "../api/restaurant";
+import axios from "axios";
 
 const Menu = (props) => {
   const [menu, setmenuArray] = useState([]);
@@ -32,7 +33,9 @@ const Menu = (props) => {
   const [cartId, setCartId] = useState("");
   const createUserCart = async () => {
     try {
-      const cartData = await createCart();
+      const cartData = await axios.post(
+        "http://localhost:3006/api/v1/getCartId"
+      );
       setCartId(cartData.data.cart_id);
       console.log(cartId);
     } catch (error) {
@@ -46,6 +49,7 @@ const Menu = (props) => {
         currCartId,
         cartMenuItemId
       );
+      console.log("Added Cart Item");
     } catch (error) {
       console.log(error.message);
     }
@@ -53,6 +57,7 @@ const Menu = (props) => {
   useEffect(() => {
     menuInfo();
     menuItemsInfo();
+    createUserCart();
   }, []);
 
   // console.log("menu");
@@ -137,7 +142,7 @@ const Menu = (props) => {
               <div className="mx-1 my-2">
                 <button
                   type="button"
-                  // onClick={addCartItemFunction(cartId, item.menu_item_id)}
+                  onClick={() => addCartItemFunction(cartId, item.menu_item_id)}
                   class="inline-block rounded bg-red-500 px-10 pt-1 pb-1 text-sm font-bold uppercase leading-normal text-white"
                 >
                   Add

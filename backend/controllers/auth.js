@@ -17,13 +17,13 @@ exports.getUsers = async (req, res) => {
 };
 
 exports.register = async (req, res) => {
-  const { user_email, user_password, isowner } = req.body;
+  const { user_email, user_password, isOwner } = req.body;
   try {
     const hashed_user_password = await hash(user_password, 10);
 
     await db.query(
-      "insert into users(user_email,user_password,isowner) values ($1 , $2,$3)",
-      [user_email, hashed_user_password, isowner]
+      "insert into users(user_email,user_password,isowner) values ($1,$2,$3)",
+      [user_email, hashed_user_password, isOwner]
     );
 
     return res.status(201).json({
@@ -40,10 +40,11 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
   let user = req.user;
-
+  let isOwner = req.user.isowner;
   let payload = {
     id: user.user_id,
     user_email: user.user_email,
+    user_isOwner: user.isowner,
   };
 
   try {
@@ -52,6 +53,7 @@ exports.login = async (req, res) => {
     return res.status(200).cookie("token", token, { httpOnly: true }).json({
       success: true,
       message: "Logged in succefully",
+      isOwner: { isOwner },
     });
   } catch (error) {
     console.log(error.message);

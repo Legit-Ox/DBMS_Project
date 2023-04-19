@@ -3,24 +3,35 @@ import { onLogin } from "../../api/auth";
 import Layout from "../../components/layout";
 import { useDispatch } from "react-redux";
 import { authenticateUser } from "../../redux/slices/authSlice";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [values, setValues] = useState({
     user_email: "",
     user_password: "",
   });
+  const navigate = useNavigate();
   const [error, setError] = useState(false);
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
+  const [isOwner, setIsOwner] = useState(null);
 
   const dispatch = useDispatch();
   const onSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await onLogin(values);
+      // await onLogin(values);
+      await axios
+        .post("http://localhost:3006/api/v1/login", values)
+        .then((response) => {
+          response.data.isOwner.isOwner
+            ? navigate("/dashboard")
+            : navigate("/homepage");
+        });
       dispatch(authenticateUser());
 
       localStorage.setItem("isAuth", "true");
@@ -29,7 +40,6 @@ const Login = () => {
       setError(error.response.data.errors[0].msg);
     }
   };
-
   return (
     <Layout>
       <form onSubmit={(e) => onSubmit(e)} className="container mt-3">

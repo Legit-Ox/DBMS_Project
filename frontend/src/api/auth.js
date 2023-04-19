@@ -9,7 +9,11 @@ export async function onRegistration(registrationData) {
 }
 
 export async function onLogin(loginData) {
-  return await axios.post("http://localhost:3006/api/v1/login", loginData);
+  return await axios
+    .post("http://localhost:3006/api/v1/login", loginData)
+    .then((response) => {
+      console.log(response.data.isOwner.isOwner);
+    });
 }
 
 export async function onLogout() {

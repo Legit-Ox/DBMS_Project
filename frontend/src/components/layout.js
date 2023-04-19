@@ -4,7 +4,7 @@ const Layout = ({ children }) => {
   return (
     <div>
       <Navbar />
-      <div className="container">{children}</div>
+      <div className="flex-col p-2">{children}</div>
     </div>
   );
 };

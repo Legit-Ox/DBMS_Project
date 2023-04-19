@@ -14,26 +14,26 @@ import TableRs from "./pages/restaurant/table_rs";
 import CustomerRs from "./pages/restaurant/customer_rs";
 import Rough from "./pages/restaurant/rough";
 import Landing2 from "./pages/landing2";
-const PrivateRoutes = () => {
-  const { isAuth } = useSelector((state) => state.auth);
+import CreateRestaurant from "./pages/restaurant/createRestaurant";
+import CreateMenu from "./pages/restaurant/createMenu";
 
-  return <>{isAuth ? <Outlet /> : <Navigate to="/login" />}</>;
-};
-
-const RestrictedRoutes = () => {
-  const { isAuth } = useSelector((state) => state.auth);
-
-  return <>{!isAuth ? <Outlet /> : <Navigate to="/dashboard" />}</>;
-};
 function App() {
   return (
     <div className="">
       <Routes>
+<<<<<<< HEAD
+        <Route path="/landing2" element={<Landing2 />} />
+=======
+>>>>>>> 4e4c1511b879e52f0ec864978a03cff11aa214ac
         <Route path="/landing" element={<LandingPage />} />
-        <Route path="/homepage" element={<HomePage />} />
+
         <Route path="/single" element={<SingleRestaurantPage />} />
         <Route path="/home2" element={<Home />} />
         <Route path="/restaurant/:id" element={<SingleRestaurantPage />} />
+<<<<<<< HEAD
+
+        <Route path="/dashboard" element={<Dashboard />} />
+=======
         <Route path="/ownerHome" element={<OwnerHome />} />
         <Route path="/menu" element={<MenuRs />} />
         <Route path="/orders" element={<OrderRs />} />
@@ -43,13 +43,14 @@ function App() {
         <Route element={<PrivateRoutes />}>
           <Route path="/dashboard" element={<Dashboard />} />
         </Route>
+>>>>>>> 4e4c1511b879e52f0ec864978a03cff11aa214ac
 
-        <Route element={<RestrictedRoutes />}>
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          
-        </Route>
-        <Route path="/landing2" element={<Landing2 />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+
+        <Route path="/homepage" element={<HomePage />} />
+        <Route path="/createRestaurant" element={<CreateRestaurant />} />
+        <Route path="/createMenu" element={<CreateMenu />} />
       </Routes>
     </div>
   );
