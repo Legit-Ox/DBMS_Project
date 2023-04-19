@@ -1,40 +1,76 @@
 const db = require("../db");
 
 //To create menu
+// exports.createMenu = async (req, res) => {
+//   console.log("create a Menu");
+//   try {
+//     if (req.user.isowner) {
+//       const results = await db.query(
+//         "INSERT INTO menu (menu_title,menu_image,menu_description, rest_id) SELECT $1 ,$2,$3, r.rest_id FROM restaurants r WHERE r.rest_owner_id = $4 LIMIT 1; ",
+//         [
+//           req.body.menu_title,
+//           req.body.menu_image,
+//           req.body.menu_description,
+//           req.user.user_id,
+//         ]
+//       );
+//       console.log(results);
+//       res.status(201).json({
+//         status: "success",
+//         data: {
+//           menu: req.body,
+//         },
+//       });
+//     } else {
+//       res.status(401).json({
+//         status: "failed",
+//         data: {
+//           message: "You are not authorized to create menu",
+//         },
+//       });
+//     }
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+
+//   console.log(req.body);
+// };
+//Function to call a procedure named create_menu
 exports.createMenu = async (req, res) => {
   console.log("create a Menu");
   try {
-    if (req.user.isowner) {
-      const results = await db.query(
-        "INSERT INTO menu (menu_title,menu_image,menu_description, rest_id) SELECT $1 ,$2,$3, r.rest_id FROM restaurants r WHERE r.rest_owner_id = $4 LIMIT 1; ",
-        [
-          req.body.menu_title,
-          req.body.menu_image,
-          req.body.menu_description,
-          req.user.user_id,
-        ]
-      );
-      console.log(results);
-      res.status(201).json({
-        status: "success",
-        data: {
-          menu: req.body,
-        },
-      });
-    } else {
-      res.status(401).json({
-        status: "failed",
-        data: {
-          message: "You are not authorized to create menu",
-        },
-      });
-    }
+    const results = await db.query(
+      "CALL create_menu($1, $2, $3, $4)",
+      [
+        req.body.menu_title,
+        req.body.menu_image,
+        req.body.menu_description,
+        req.user.user_id,
+      ],
+
+      (err, result) => {
+        if (err) {
+          console.error("Error calling create_menu function:", err);
+        } else {
+          // Extract the status code from the result
+          statusCode = result.rows[0].create_menu;
+          console.log("Status code:", statusCode);
+          res.status(201).json({
+            status: "success",
+            data: {
+              menu: req.body,
+            },
+          });
+        }
+      }
+    );
   } catch (error) {
     console.log(error.message);
   }
 
   console.log(req.body);
 };
+
 //Function to get menu of the current user
 exports.getMenu = async (req, res) => {
   console.log("get a Menu");
@@ -62,7 +98,7 @@ exports.createMenuItem = async (req, res) => {
   try {
     if (req.user.isowner) {
       const results = await db.query(
-        "INSERT INTO menu_item (menu_item_name,menu_item_image,menu_item_description,menu_item_category,menu_item_price,menu_item_quantity,menu_id) SELECT $1 ,$2,$3,$4,$5,$6, m.menu_id FROM menu m WHERE m.rest_id = (SELECT r.rest_id FROM restaurants r WHERE r.rest_owner_id = $7 LIMIT 1) LIMIT 1; ",
+        "CALL create_menu_item($1,$2,$3, $4,$5,$6,$7)",
         [
           req.body.menu_item_name,
           req.body.menu_item_image,

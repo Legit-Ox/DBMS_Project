@@ -2,19 +2,16 @@ const db = require("../db");
 //Function to create a table when the user is a restaurant owner
 exports.createTable = async (req, res) => {
   try {
-    const results = await db.query(
-      "INSERT INTO tables (table_name,table_capacity,table_status,rest_id) VALUES ($1,$2,$3,$4) returning *",
-      [
-        req.body.table_name,
-        req.body.table_capacity,
-        req.body.table_status,
-        req.body.rest_id,
-      ]
-    );
+    const results = await db.query("CALL create_table($1,$2,$3,$4)", [
+      req.body.table_name,
+      req.body.table_capacity,
+      req.body.table_status,
+      req.user.user_id,
+    ]);
     res.status(201).json({
       status: "success",
       data: {
-        table: results.rows[0],
+        table: req.body,
       },
     });
   } catch (error) {

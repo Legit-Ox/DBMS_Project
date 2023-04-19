@@ -1,12 +1,19 @@
-import { useState } from "react";
+import { React, useState } from "react";
 import { onRegistration } from "../../api/auth";
 import Layout from "../../components/layout";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [values, setValues] = useState({
     user_email: "",
     user_password: "",
+    isOwner: false,
   });
+  const handleChange = () => {
+    setValues({ ...values, isOwner: !values.isOwner });
+  };
+
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -16,13 +23,13 @@ const Register = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(values.isOwner);
     try {
       const { data } = await onRegistration(values);
-
       setError("");
       setSuccess(data.message);
-      setValues({ user_email: "", user_password: "" });
+      setValues({ user_email: "", user_password: "", isOwner: false });
+      navigate("/login");
     } catch (error) {
       setError(error.response.data.errors[0].msg);
       setSuccess("");
@@ -33,7 +40,6 @@ const Register = () => {
     <Layout>
       <form onSubmit={(e) => onSubmit(e)} className="container mt-3">
         <h1>Register</h1>
-
         <div className="mb-3">
           <label htmlFor="email" className="form-label">
             Email address
@@ -49,7 +55,6 @@ const Register = () => {
             required
           />
         </div>
-
         <div className="mb-3">
           <label htmlFor="password" className="form-label">
             Password
@@ -61,14 +66,23 @@ const Register = () => {
             className="form-control"
             id="password"
             name="user_password"
-            placeholder="passwod"
+            placeholder="password"
             required
           />
         </div>
-
         <div style={{ color: "red", margin: "10px 0" }}>{error}</div>
         <div style={{ color: "green", margin: "10px 0" }}>{success}</div>
-
+        <label>
+          <input
+            type="checkbox"
+            checked={values.isOwner}
+            onChange={(e) => {
+              handleChange();
+            }}
+            name="isOwner"
+          />
+          Register as a restaurant
+        </label>
         <button type="submit" className="btn btn-primary">
           Submit
         </button>

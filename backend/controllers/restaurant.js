@@ -1,10 +1,12 @@
 const db = require("../db");
 
+//Create a restaurant from a procedure create_restaurant
+
 exports.createRestaurant = async (req, res) => {
   console.log("create a Restaurant");
   try {
     const results = await db.query(
-      "INSERT INTO restaurants (rest_name,rest_veg,rest_area,rest_city,rest_type,rest_rating,rest_image,rest_description,rest_owner_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8,$9) returning *",
+      "CALL create_restaurant($1,$2,$3,$4,$5,$6,$7,$8,$9)",
       [
         req.body.rest_name,
         req.body.rest_veg,
@@ -21,7 +23,7 @@ exports.createRestaurant = async (req, res) => {
     res.status(201).json({
       status: "success",
       data: {
-        restaurant: results.rows,
+        restaurant: results.rows[0],
       },
     });
   } catch (error) {
@@ -30,6 +32,37 @@ exports.createRestaurant = async (req, res) => {
 
   console.log(req.body);
 };
+
+// exports.createRestaurant = async (req, res) => {
+//   console.log("create a Restaurant");
+//   try {
+//     const results = await db.query(
+//       "INSERT INTO restaurants (rest_name,rest_veg,rest_area,rest_city,rest_type,rest_rating,rest_image,rest_description,rest_owner_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8,$9) returning *",
+//       [
+//         req.body.rest_name,
+//         req.body.rest_veg,
+//         req.body.rest_area,
+//         req.body.rest_city,
+//         req.body.rest_type,
+//         req.body.rest_rating,
+//         req.body.rest_image,
+//         req.body.rest_description,
+//         req.user.user_id,
+//       ]
+//     );
+//     console.log(results);
+//     res.status(201).json({
+//       status: "success",
+//       data: {
+//         restaurant: results.rows,
+//       },
+//     });
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+
+//   console.log(req.body);
+// };
 
 //write a function getDetails to get all the details of the restaurant
 exports.getDetails = async (req, res) => {

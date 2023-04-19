@@ -3,7 +3,6 @@ import Nav from "../../components/NavBar";
 import SearchBar from "../../components/SearchBar";
 
 function LandingPage() {
-  
   return (
     <div className="">
       <Nav />
