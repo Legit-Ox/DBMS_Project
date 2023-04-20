@@ -26,21 +26,25 @@ function Landing2() {
           PLATE TRACKER
         </h1>
         <ul className="hidden md:flex">
-          <li
-            className="p-4"
-            onClick={() => {
-              navigate("/register");
-            }}
-          >
-            Register
+          <li>
+            <button
+              className="p-4"
+              onClick={() => {
+                navigate("/register");
+              }}
+            >
+              Register
+            </button>
           </li>
-          <li
-            className="p-4"
-            onClick={() => {
-              navigate("/login");
-            }}
-          >
-            Login
+          <li>
+            <button
+              className="p-4"
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              Login{" "}
+            </button>
           </li>
         </ul>
         <div onClick={handleNav} className="block md:hidden">
