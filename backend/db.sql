@@ -491,28 +491,20 @@ $$ LANGUAGE plpgsql;
 
 
 
-// Create a function named increment_cart_item. Refer this query:- UPDATE cart_item SET quantity = quantity + 1 WHERE cart_id = $1 AND menu_item_id = $2 returning *
+// Create a function named increment_cart_item. Refer this query:- UPDATE cart_item SET quantity = quantity + 1 WHERE cart_id = $1 AND cart_item_id = $2 returning *
 
 //FUNCTION TO INCREMENT CART ITEM
 
+
 CREATE OR REPLACE FUNCTION increment_cart_item(
     cart_id INTEGER,
-    menu_item_id INTEGER
+    cart_item_id INTEGER
 )
-
 RETURNS cart_item AS $$
-
-DECLARE
-
-    cart_item cart_item;
-
 BEGIN
-    
-        UPDATE cart_item SET quantity = quantity + 1 WHERE cart_id = cart_id AND menu_item_id = menu_item_id returning * INTO cart_item;
-    
-        RETURN cart_item;
-    
-    END;
+    -- Update the cart_item table
+    UPDATE cart_item SET cart_item_quantity = cart_item_quantity + 1 WHERE cart_id = cart_id AND cart_item_id = cart_item_id returning *;
+END;
 $$ LANGUAGE plpgsql;
 
 
@@ -547,13 +539,13 @@ EXECUTE FUNCTION update_cart_item_total();
 
 CREATE OR REPLACE FUNCTION update_order_item_total() RETURNS TRIGGER AS $$
 BEGIN
-    NEW.order_item_total = NEW.order_item_quantity * (SELECT m.menu_item_price FROM menu_item m WHERE m.menu_item_id = NEW.menu_item_id) * (1 - (SELECT m.menu_item_discount FROM menu_item m WHERE m.menu_item_id = NEW.menu_item_id));
+    NEW.order_item_total = NEW.order_item_quantity * (SELECT m.menu_item_price FROM menu_item m WHERE m.menu_item_id = NEW.menu_item_id) * ((1 - (SELECT m.menu_item_discount FROM menu_item m WHERE m.menu_item_id = NEW.menu_item_id))/100);
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER update_order_item_total
-AFTER INSERT ON order_item
+BEFORE INSERT OR UPDATE ON order_item
 FOR EACH ROW
 EXECUTE FUNCTION update_order_item_total();
 
@@ -570,7 +562,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER update_cart_total
-AFTER UPDATE ON cart_item
+AFTER UPDATE OR INSERT ON cart_item
 FOR EACH ROW
 EXECUTE FUNCTION update_cart_total();
 
@@ -588,7 +580,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER update_order_total
-AFTER INSERT ON order_item
+AFTER INSERT OR UPDATE ON order_item
 FOR EACH ROW
 EXECUTE FUNCTION update_order_total();
 
@@ -625,11 +617,14 @@ EXECUTE FUNCTION update_revenue();
 
 //FUNCTION TO PLACE ORDER
 
+//Remove the ambiguity
+
+
+
 CREATE OR REPLACE FUNCTION place_order(
     c_user_id INTEGER,
     c_rest_id INTEGER
 )
-
 RETURNS orders AS $$
 DECLARE
     orders orders;
@@ -638,12 +633,26 @@ DECLARE
     order_item order_item;
 BEGIN
     SELECT * FROM cart WHERE user_id = c_user_id INTO cart;
-    SELECT * FROM cart_item WHERE cart_id = cart.cart_id INTO cart_item;
-    INSERT INTO orders (user_id, rest_id, order_total, order_status) VALUES (c_user_id, c_rest_id, cart.cart_total, 'PLACED') returning * INTO orders;
-    INSERT INTO order_item (order_id, menu_item_id, order_item_quantity, order_item_total) VALUES (orders.order_id, cart_item.menu_item_id, cart_item.cart_item_quantity, cart_item.cart_item_total) returning * INTO order_item;
+
+    -- Insert into orders table
+    INSERT INTO orders (user_id, rest_id, order_total, order_status)
+    VALUES (c_user_id, c_rest_id, cart.cart_total, 'PLACED') RETURNING * INTO orders;
+
+    -- Fetch cart_items associated with the cart_id
+    FOR cart_item IN (SELECT * FROM cart_item WHERE cart_id = cart.cart_id)
+    LOOP
+        -- Insert into order_item table
+        INSERT INTO order_item (order_id, menu_item_id, order_item_quantity, )
+        VALUES (orders.order_id, cart_item.menu_item_id, cart_item.cart_item_quantity)
+        RETURNING * INTO order_item;
+    END LOOP;
+
     RETURN orders;
 END;
 $$ LANGUAGE plpgsql;
+
+
+
 
 
 
@@ -657,14 +666,14 @@ $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION increase_cart_item_quantity(
     c_cart_id INTEGER,
-    c_menu_item_id INTEGER
+    c_cart_item_id INTEGER
 )
 
 RETURNS cart_item AS $$
 DECLARE
     cart_item cart_item;
 BEGIN
-    UPDATE cart_item SET cart_item_quantity = cart_item_quantity + 1 WHERE cart_id = c_cart_id AND menu_item_id = c_menu_item_id returning * INTO cart_item;
+    UPDATE cart_item SET cart_item_quantity = cart_item_quantity + 1 WHERE cart_id = c_cart_id AND cart_item_id = c_cart_item_id returning * INTO cart_item;
     RETURN cart_item;
 END;
 $$ LANGUAGE plpgsql;
@@ -674,7 +683,7 @@ $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION decrease_cart_item_quantity(
     c_cart_id INTEGER,
-    c_menu_item_id INTEGER
+    c_cart_item_id INTEGER
 )
 
 RETURNS cart_item AS $$
@@ -685,7 +694,7 @@ DECLARE
 
 BEGIN
     
-        UPDATE cart_item SET cart_item_quantity = cart_item_quantity - 1 WHERE cart_id = c_cart_id AND menu_item_id = c_menu_item_id returning * INTO cart_item;
+        UPDATE cart_item SET cart_item_quantity = cart_item_quantity - 1 WHERE cart_id = c_cart_id AND cart_item_id = c_cart_item_id returning * INTO cart_item;
     
         RETURN cart_item;
     
@@ -693,6 +702,20 @@ BEGIN
 $$ LANGUAGE plpgsql;
 
 
+//A procedure to remove a cart_item based on cart_item_id
+
+CREATE OR REPLACE PROCEDURE remove_cart_item(
+    c_cart_item_id INTEGER
+)
+
+AS $$
+BEGIN
+    DELETE FROM cart_item WHERE cart_item_id = c_cart_item_id;
+END;
+$$ LANGUAGE plpgsql;
+
+
+//Write a procedure which will display details of invoices of current month. Also, display year wise
 
 
 

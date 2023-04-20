@@ -79,7 +79,10 @@ function MenuRs() {
         </div>
         <div className="w-full bg-white py-8 px-4">
           <div className="flex-col justify-start my-auto">
-            <h1 className="text-[#131212] text-4xl mx-1">Menu</h1>
+            <h1 className="text-[#131212] text-4xl mx-1">Breakfast Specials</h1>
+            <h1 className="text-[#131212] text-xl mx-1">
+              Menu made specially for breakfast lovers{" "}
+            </h1>
           </div>
           {/* Loop of the items */}
           <div className="mx-2 my-3 grid grid-rows-3 grid-flow-col gap-4">
@@ -110,7 +113,7 @@ function MenuRs() {
                 </div>
               </div>
               <div className="mx-3 my-12 row-span-4 col-span-4 font-sans text-lg font-bold justify-self-center">
-                &#x20B9; 400
+                &#x20B9; 40
               </div>
             </div>
             <div className="col-span-1 row-span-4 object-cover justify-self-center">
@@ -121,7 +124,7 @@ function MenuRs() {
               />
             </div>
           </div>
-          <div className="mx-2 my-3 grid grid-rows-3 grid-flow-col gap-4">
+          {/* <div className="mx-2 my-3 grid grid-rows-3 grid-flow-col gap-4">
             <div className="row-span-4 col-span-9 grid grid-rows-3 grid-flow-col gap-4">
               <div className="mx-2 my-2 row-span-4 col-span-6">
                 <div className="font-sans text-2xl font-semibold text-[#474554] mx-1 my-1">
@@ -159,7 +162,7 @@ function MenuRs() {
                 alt="/menu"
               />
             </div>
-          </div>
+          </div> */}
         </div>
         {/* Add item button in the page */}
         <div className="mx-2 my-3 grid grid-rows-3 grid-flow-col gap-4">

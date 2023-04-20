@@ -16,6 +16,8 @@ import Rough from "./pages/restaurant/rough";
 import Landing2 from "./pages/landing2";
 import CreateRestaurant from "./pages/restaurant/createRestaurant";
 import CreateMenu from "./pages/restaurant/createMenu";
+import CreateTable from "./pages/restaurant/createTable";
+import CreateMenuItem from "./pages/restaurant/createMenuItem";
 
 function App() {
   return (
@@ -43,6 +45,8 @@ function App() {
         <Route path="/homepage" element={<HomePage />} />
         <Route path="/createRestaurant" element={<CreateRestaurant />} />
         <Route path="/createMenu" element={<CreateMenu />} />
+        <Route path="/createTable" element={<CreateTable />} />
+        <Route path="/createMenuItem" element={<CreateMenuItem />} />
       </Routes>
     </div>
   );

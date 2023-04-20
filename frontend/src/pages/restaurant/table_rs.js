@@ -83,7 +83,7 @@ function TableRs() {
           </div>
           <div className="grid md:grid-cols-5 mx-4 my-4 flex-col">
             <div className="mx-1 my-auto font-sans text-2xl  font-semibold text-[#474554] justify-self-center">
-              Table Number
+              Table Name
             </div>
             <div className="mx-1 my-auto font-sans text-2xl  font-semibold text-[#474554] justify-self-center">
               Table Capacity
@@ -99,17 +99,21 @@ function TableRs() {
           {/* Loop of the items*/}
           <div className="grid md:grid-cols-5 mx-4 my-4 flex-col">
             <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
-              1
+              Table 1
             </div>
             <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
               5 person
             </div>
 
             <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
-              Occupied
+              Available
             </div>
             <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
-            <input type="text" placeholder="Status" class="px-2 py-1 placeholder-slate-300 text-slate-600 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"/>
+              <input
+                type="text"
+                placeholder="Status"
+                class="px-2 py-1 placeholder-slate-300 text-slate-600 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
+              />
             </div>
             <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
               <button
@@ -121,7 +125,7 @@ function TableRs() {
               </button>
             </div>
           </div>
-          <div className="grid md:grid-cols-5 mx-4 my-4 flex-col">
+          {/* <div className="grid md:grid-cols-5 mx-4 my-4 flex-col">
             <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
               2
             </div>
@@ -144,7 +148,7 @@ function TableRs() {
                 Update
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

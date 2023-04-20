@@ -7,6 +7,8 @@ const {
   decrementCartItemQuantity,
   getCartId,
   getCartItems,
+  getCartDetails,
+  removeCartItem,
 } = require("../controllers/cart");
 const { createCart } = require("../controllers/cart");
 
@@ -20,5 +22,7 @@ router.get("/getCartItems", userAuth, getCartItems);
 router.post("/addCartItem", userAuth, addCartItem);
 router.post("/incrementCartItem", userAuth, incrementCartItemQuantity);
 router.post("/decrementCartItem", userAuth, decrementCartItemQuantity);
+router.get("/getCartDetails", userAuth, getCartDetails);
+router.get("/removeCartItem", userAuth, removeCartItem);
 
 module.exports = router;

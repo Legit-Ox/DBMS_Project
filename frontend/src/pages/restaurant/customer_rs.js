@@ -84,18 +84,27 @@ function CustomerRs() {
             <h1 className="text-[#131212] text-4xl mx-1">Create </h1>
           </div>
           <div className="mx-4 my-4 flex-col">
-          <div className="mx-5 my-auto justify-center">
-              <button onClick={() => navigate("/createRestaurant")}
+            <div className="mx-5 my-auto justify-center">
+              <button
+                onClick={() => navigate("/createRestaurant")}
                 type="button"
                 class=" rounded inline-block bg-red-500 px-10 pt-1 pb-1 mx-2 text-base w-101 font-normal leading-normal text-white"
               >
-                Create Restaurant 
+                Create Restaurant
               </button>
-              <button onClick={() => navigate("/createMenu")}
+              <button
+                onClick={() => navigate("/createMenu")}
                 type="button"
                 class=" rounded inline-block bg-green-500 px-10 pt-1 pb-1 mx-2 text-base w-56 font-normal leading-normal text-white"
               >
-                Create Menu 
+                Create Menu
+              </button>
+              <button
+                onClick={() => navigate("/createMenu")}
+                type="button"
+                class=" rounded inline-block bg-blue-500 px-10 pt-1 pb-1 mx-2 text-base w-56 font-normal leading-normal text-white"
+              >
+                Create Table
               </button>
             </div>
           </div>

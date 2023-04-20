@@ -7,15 +7,32 @@ import { MdLogout } from "react-icons/md";
 import { MdCreate } from "react-icons/md";
 import { FiFolder, FiShoppingCart } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { fetchProtectedInfo, onLogout } from "../../api/auth";
+import LandingPage from "../customer/LandingPage";
+import { useNavigate } from "react-router-dom";
+import { unauthenticateUser } from "../../redux/slices/authSlice";
 
 const OwnerHome = () => {
+  const logout = async () => {
+    try {
+      await onLogout();
+      navigate("/login");
+      dispatch(unauthenticateUser());
+      localStorage.removeItem("isAuth");
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const menus = [
     { name: "Dashboard", link: "/ownerHome", icon: MdOutlineDashboard },
     { name: "Menu", link: "/menu", icon: MdRestaurantMenu },
     { name: "Orders", link: "/orders", icon: FiShoppingCart },
     { name: "Table", link: "/table", icon: MdTableRestaurant, margin: true },
     { name: "Create", link: "/customer", icon: MdCreate },
-    { name: "Logout", link: "/", icon: MdLogout },
+    { name: "Logout", link: "/logout", icon: MdLogout },
   ];
   const [open, setOpen] = useState(true);
   return (
@@ -72,8 +89,11 @@ const OwnerHome = () => {
               className="block w-[400px] h-[35px] px-4 py-2 text-[#0c0c0c] bg-white border rounded-md"
               placeholder="Search..."
             />
-            <button className="px-4 h-[35px] text-white bg-gray-800 border-l rounded mx-1">
-              Search
+            <button
+              className="px-4 h-[35px] text-white bg-gray-800 border-l rounded mx-1"
+              onClick={() => logout()}
+            >
+              Logout
             </button>
           </div>
         </div>
@@ -164,7 +184,7 @@ const OwnerHome = () => {
               </button>
             </div>
           </div>
-          <div className="grid md:grid-cols-2 mx-4 my-4 flex-col">
+          {/* <div className="grid md:grid-cols-2 mx-4 my-4 flex-col">
             <div className="mx-2 my-auto font-sans text-2xl font-semibold text-[#474554] justify-self-end">
               No. of Items Remaining:
             </div>
@@ -176,7 +196,7 @@ const OwnerHome = () => {
                 120
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="w-full bg-white py-4 px-4">
           <div className="flex-col justify-start my-auto">

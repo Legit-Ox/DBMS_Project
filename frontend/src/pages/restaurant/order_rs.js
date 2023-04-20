@@ -82,66 +82,73 @@ function OrderRs() {
             <h1 className="text-[#131212] text-4xl mx-1">Orders</h1>
           </div>
           <div className="mx-2 my-3 bg-slate-200 gap-4">
-          <div className="my-1 mx-1 text-xl"> Order Id: #101214</div> <hr />
-          <div className="my-2 mx-2 text-xl"> Items Ordered : </div> <br />
-          <div className="grid md:grid-cols-2 mx-2 my-1 flex-col">
-            <div className="mx-1 my-auto font-sans text-2xl  font-semibold text-[#474554] justify-self-center">
-              Items
+            <div className="my-1 mx-1 text-xl"> Order Id: #101214</div> <hr />
+            <div className="my-2 mx-2 text-xl"> Items Ordered : </div> <br />
+            <div className="grid md:grid-cols-2 mx-2 my-1 flex-col">
+              <div className="mx-1 my-auto font-sans text-2xl  font-semibold text-[#474554] justify-self-center">
+                Items
+              </div>
+              <div className="mx-1 my-auto font-sans text-2xl  font-semibold text-[#474554] justify-self-center">
+                Quantity
+              </div>
             </div>
-            <div className="mx-1 my-auto font-sans text-2xl  font-semibold text-[#474554] justify-self-center">
-              Quantity
-            </div>
-          </div>
-          {/*Loop of the items that are ordered */}
-          <div className="grid md:grid-cols-2 mx-2 my-1 flex-col">
+            {/*Loop of the items that are ordered */}
+            {/* <div className="grid md:grid-cols-2 mx-2 my-1 flex-col">
             <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
             Margerita
             </div>
             <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
               1
             </div>
-          </div>  
-          <div className="grid md:grid-cols-2 mx-2 my-1 flex-col">
-            <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
-            Pizza
+          </div>   */}
+            <div className="grid md:grid-cols-2 mx-2 my-1 flex-col">
+              <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
+                Pizza
+              </div>
+              <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
+                1
+              </div>
             </div>
-            <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
-              2
-            </div>
-          </div>  
-          <div className="grid md:grid-cols-2 mx-2 my-1 flex-col">
+            {/* <div className="grid md:grid-cols-2 mx-2 my-1 flex-col">
             <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
             CoCo Cola
             </div>
             <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
               2
             </div>
-          </div>     
-          
-           <hr />
-          {/*Loop ends */}
-          <div className="my-1 mx-1 text-xl"> Total Amount : &#x20B9; 800</div> <hr />
-          <div className="grid md:grid-cols-4 mx-2 my-3 flex-col">
-            <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
-           Status
+          </div>      */}
+            <hr />
+            {/*Loop ends */}
+            <div className="my-1 mx-1 text-xl">
+              {" "}
+              Total Amount : &#x20B9; 40
+            </div>{" "}
+            <hr />
+            <div className="grid md:grid-cols-4 mx-2 my-3 flex-col">
+              <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
+                Status
+              </div>
+              <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
+                Pending
+              </div>
+              <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
+                <input
+                  type="text"
+                  placeholder="Update"
+                  class="px-2 py-1 placeholder-slate-300 text-slate-600 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
+                />
+              </div>
+              <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
+                <button
+                  type="button"
+                  // onClick={addCartItemFunction(cartId, item.menu_item_id)}
+                  class="inline-block rounded bg-green-700 px-10 pt-1 pb-1 text-sm font-bold uppercase leading-normal text-white"
+                >
+                  Update
+                </button>
+              </div>
             </div>
-            <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
-              Pending 
-            </div>
-            <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
-            <input type="text" placeholder="Update" class="px-2 py-1 placeholder-slate-300 text-slate-600 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"/>
-            </div>
-            <div className="mx-1 my-auto font-sans text-xl font-medium text-black justify-self-center">
-              <button
-                type="button"
-                // onClick={addCartItemFunction(cartId, item.menu_item_id)}
-                class="inline-block rounded bg-green-700 px-10 pt-1 pb-1 text-sm font-bold uppercase leading-normal text-white"
-              >
-                Update
-              </button>
-            </div>
-          </div>   
-           </div>
+          </div>
         </div>
       </div>
     </section>

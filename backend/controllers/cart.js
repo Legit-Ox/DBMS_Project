@@ -62,7 +62,7 @@ exports.addCartItem = async (req, res) => {
 exports.incrementCartItemQuantity = async (req, res) => {
   const { rows: cartItem } = await db.query(
     "SELECT * from increase_cart_item_quantity($1, $2)",
-    [req.query.cartId, req.query.menuItemId],
+    [req.query.cartId, req.query.cartItemId],
     (err, result) => {
       if (err) {
         console.error("Error calling increase_cart_item_quantity:", err);
@@ -94,7 +94,7 @@ exports.incrementCartItemQuantity = async (req, res) => {
 exports.decrementCartItemQuantity = async (req, res) => {
   const { rows: cartItem } = await db.query(
     "SELECT * from decrease_cart_item_quantity($1, $2)",
-    [req.query.cartId, req.query.menuItemId],
+    [req.query.cartId, req.query.cartItemId],
     (err, result) => {
       if (err) {
         console.error("Error calling decrease_cart_item_quantity:", err);
@@ -132,6 +132,16 @@ exports.getCartId = async (req, res) => {
   res.status(200).send(cart[0]);
 };
 
+//Create a function to get all the details of a cart based on user_id
+
+exports.getCartDetails = async (req, res) => {
+  const { rows: cart } = await db.query(
+    "SELECT * FROM cart WHERE user_id = $1",
+    [req.user.user_id]
+  );
+  res.status(200).send(cart[0]);
+};
+
 //Function to get all cart_item based on cart_id
 
 exports.getCartItems = async (req, res) => {
@@ -140,4 +150,28 @@ exports.getCartItems = async (req, res) => {
     [req.query.cartId]
   );
   res.status(200).send(cart);
+};
+
+//Function to call a procedure named remove_cart_item
+
+exports.removeCartItem = async (req, res) => {
+  const { rows: cart } = await db.query(
+    "CALL remove_cart_item($1)",
+    [req.query.cartItemId],
+    (err, result) => {
+      if (err) {
+        console.error("Error calling remove_cart_item:", err);
+      } else {
+        // Extract the status code from the result
+        statusCode = result.rows[0].remove_cart_item;
+        console.log("Status code:", statusCode);
+        res.status(200).json({
+          status: "success",
+          data: {
+            cart: req.body,
+          },
+        });
+      }
+    }
+  );
 };
